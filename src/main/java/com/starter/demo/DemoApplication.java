@@ -15,11 +15,6 @@ public class DemoApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(DemoApplication.class, args);
 	}
-//
-//	@Bean
-////	@Profile({"dev","test"})// 设置 dev test 环境开启
-//	public PerformanceInterceptor performanceInterceptor() {
-//		return new PerformanceInterceptor();
-//	}
+
 
 }

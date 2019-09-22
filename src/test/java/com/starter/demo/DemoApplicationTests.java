@@ -15,25 +15,6 @@ import org.springframework.test.context.junit4.SpringRunner;
 @ActiveProfiles("test")
 public class DemoApplicationTests {
 
-//	@Autowired
-//	private UserMapper userMapper;
-//	@Test
-//	public void testSelect() {
-//		System.out.println(("----- selectAll method test ------"));
-//		List<User> userList = userMapper.selectList(null);
-//		Assert.assertEquals(5, userList.size());
-//		userList.forEach(System.out::println);
-//	}
-//
-//	@Test
-//	public void testSelect2() {
-//		System.out.println(("----- selectAll method test ------"));
-//		List<User> userList = userMapper.findAllByAge(2);
-//		Assert.assertEquals(1, userList.size());
-//		userList.forEach(System.out::println);
-//	}
-
-
 	@Test
 	public void contextLoads() {
 	}

@@ -1,8 +1,14 @@
 package com.starter.demo;
 
 
+import static com.starter.demo.util.TokenStore.tokenStore;
 
+import com.starter.demo.enums.RoleEnum;
+import com.starter.demo.request.AuthRequest;
+import com.starter.demo.response.AuthResponse;
 import io.restassured.RestAssured;
+import io.restassured.http.ContentType;
+import io.restassured.http.Header;
 import org.junit.Before;
 import org.junit.ClassRule;
 import org.junit.Rule;
@@ -22,6 +28,7 @@ import org.springframework.test.context.junit4.rules.SpringMethodRule;
 @ActiveProfiles("test")
 @TestPropertySource(properties = "service.url = http://localhost:8069")
 public class BaseIntegrationTest {
+
     @ClassRule
     public final static SpringClassRule SPRING_CLASS_RULE = new SpringClassRule();
 
@@ -32,15 +39,41 @@ public class BaseIntegrationTest {
     private Environment environment;
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
+
     @Before
     public void setUp() {
         String port = environment.getProperty("local.server.port");
         RestAssured.baseURI = "http://localhost:" + port;
+        if (tokenStore.isEmpty()) {
+            logger.info("generate token");
+            tokenStore.put(RoleEnum.ROLE_USER, jwtToken("user", "user"));
+            tokenStore.put(RoleEnum.ROLE_ADMIN, jwtToken("admin", "admin"));
+
+        }
+
+
     }
 
-    //TODO configure your mock response here
-//    protected void initializeWireMock() {
-//        WireMock.stubFor(WireMock.get(WireMock.anyUrl()).willReturn(WireMock.aResponse().withStatus(200)
-//                .withBody("")));
-//    }
+    private Header jwtToken(String user, String password) {
+        AuthRequest authRequest = new AuthRequest(user, password);
+        String token = new StringBuilder()
+                .append("Bearer ")
+                .append(
+                        RestAssured.given()
+                                .when()
+                                .contentType(ContentType.JSON)
+                                .body(authRequest)
+                                .post("/login")
+                                .then()
+                                .statusCode(200)
+                                .extract()
+                                .as(AuthResponse.class)
+                                .getAccess_token()
+                )
+                .toString();
+        return new Header("Authorization", token);
+
+
+    }
+
 }
