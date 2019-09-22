@@ -11,7 +11,7 @@ import org.junit.Test;
 public class AuthenticationControllerTest extends BaseIntegrationTest {
 
     @Test
-    public void login() {
+    public void loginForUser() {
         AuthRequest authRequest = new AuthRequest("user", "user");
         RestAssured.given()
                 .when()
@@ -23,4 +23,16 @@ public class AuthenticationControllerTest extends BaseIntegrationTest {
                 .statusCode(200);
     }
 
+    @Test
+    public void loginForAdmin() {
+        AuthRequest authRequest = new AuthRequest("admin", "admin");
+        RestAssured.given()
+                .when()
+                .contentType(ContentType.JSON)
+                .body(authRequest)
+                .post("/login")
+                .then()
+                .body("$", hasKey("access_token"))
+                .statusCode(200);
+    }
 }
