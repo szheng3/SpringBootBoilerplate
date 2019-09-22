@@ -55,7 +55,7 @@ public class ResourceControllerTest extends BaseIntegrationTest {
                 .header(tokenStore.get(RoleEnum.ROLE_USER))
                 .get("/resource/admin")
                 .then()
-                .statusCode(401);
+                .statusCode(403);
 
     }
 
