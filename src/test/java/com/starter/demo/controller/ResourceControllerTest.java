@@ -42,9 +42,38 @@ public class ResourceControllerTest extends BaseIntegrationTest {
 
     @Test
     public void admin() {
+        RestAssured.given()
+                .when()
+                .contentType(ContentType.JSON)
+                .header(tokenStore.get(RoleEnum.ROLE_ADMIN))
+                .get("/resource/admin")
+                .then()
+                .statusCode(200);
+        RestAssured.given()
+                .when()
+                .contentType(ContentType.JSON)
+                .header(tokenStore.get(RoleEnum.ROLE_USER))
+                .get("/resource/admin")
+                .then()
+                .statusCode(401);
+
     }
 
     @Test
     public void userOrAdmin() {
+        RestAssured.given()
+                .when()
+                .contentType(ContentType.JSON)
+                .header(tokenStore.get(RoleEnum.ROLE_ADMIN))
+                .get("/resource/user-or-admin")
+                .then()
+                .statusCode(200);
+        RestAssured.given()
+                .when()
+                .contentType(ContentType.JSON)
+                .header(tokenStore.get(RoleEnum.ROLE_USER))
+                .get("/resource/user-or-admin")
+                .then()
+                .statusCode(200);
     }
 }
