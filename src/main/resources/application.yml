@@ -4,3 +4,13 @@ mybatis-plus:
 spring:
   profiles:
     active: dev
+
+springbootwebfluxjjwt:
+  password:
+    encoder:
+      secret: mysecret
+      iteration: 33
+      keylength: 256
+  jjwt:
+    secret: 11111
+    expiration: 100000
