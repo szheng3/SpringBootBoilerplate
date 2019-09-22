@@ -2,6 +2,7 @@ package com.starter.demo.controller;
 
 
 import com.starter.demo.domain.Message;
+import java.security.Principal;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -14,7 +15,7 @@ public class ResourceREST {
 
     @RequestMapping(value = "/resource/user", method = RequestMethod.GET)
     @PreAuthorize("hasRole('USER')")
-    public Mono<ResponseEntity<?>> user() {
+    public Mono<ResponseEntity<?>> user(Principal principal) {
         return Mono.just(ResponseEntity.ok(new Message("Content for user")));
     }
 

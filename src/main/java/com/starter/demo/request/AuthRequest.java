@@ -1,4 +1,4 @@
-package com.starter.demo.domain;
+package com.starter.demo.request;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -9,6 +9,7 @@ import lombok.ToString;
 @NoArgsConstructor
 @AllArgsConstructor
 @ToString
-public class AuthResponse {
-    private String token;
+public class  AuthRequest {
+    private String username;
+    private String password;
 }

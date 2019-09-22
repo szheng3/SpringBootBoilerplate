@@ -12,5 +12,5 @@ springbootwebfluxjjwt:
       iteration: 33
       keylength: 256
   jjwt:
-    secret: 11111
-    expiration: 100000
+    secret: ThisIsSecretForJWTHS512SignatureAlgorithmThatMUSTHave512bitsKeySizegg
+    expiration: 10000
