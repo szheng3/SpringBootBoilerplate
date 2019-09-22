@@ -10,5 +10,5 @@ import lombok.ToString;
 @AllArgsConstructor
 @ToString
 public class AuthResponse {
-    private String token;
+    private String access_token;
 }

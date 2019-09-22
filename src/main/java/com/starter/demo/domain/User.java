@@ -5,7 +5,7 @@ import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.starter.demo.enums.Role;
+import com.starter.demo.enums.RoleEnum;
 import java.util.Collection;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -34,7 +34,7 @@ public class User extends Root implements UserDetails {
 
     @Getter
     @Setter
-    private List<Role> roles;
+    private List<RoleEnum> roleEnums;
 
     public User(String username) {
         this.username = username;
@@ -71,7 +71,7 @@ public class User extends Root implements UserDetails {
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return this.roles.stream().map(authority -> new SimpleGrantedAuthority(authority.name())).collect(Collectors.toList());
+        return this.roleEnums.stream().map(authority -> new SimpleGrantedAuthority(authority.name())).collect(Collectors.toList());
     }
 
     @JsonIgnore

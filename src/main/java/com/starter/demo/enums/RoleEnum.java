@@ -2,12 +2,12 @@ package com.starter.demo.enums;
 
 import com.baomidou.mybatisplus.core.enums.IEnum;
 
-public enum Role implements IEnum<String> {
+public enum RoleEnum implements IEnum<String> {
     ROLE_USER("user"), ROLE_ADMIN("admin");
 
     private final String role;
 
-    Role(String role) {
+    RoleEnum(String role) {
         this.role = role;
     }
 

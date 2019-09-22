@@ -16,7 +16,7 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Table structure for table `role`
+-- Table structure for table `roleEnum`
 --
 
 DROP TABLE IF EXISTS `role`;
@@ -30,7 +30,7 @@ CREATE TABLE `role` (
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `role`
+-- Dumping data for table `roleEnum`
 --
 
 LOCK TABLES `role` WRITE;
