@@ -1,7 +1,5 @@
 package com.starter.demo.configuration.security;
 
-import com.starter.demo.configuration.security.AuthenticationManager;
-import com.starter.demo.configuration.security.SecurityContextRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.http.HttpMethod;
@@ -42,7 +40,15 @@ public class WebSecurityConfig {
                 .securityContextRepository(securityContextRepository)
                 .authorizeExchange()
                 .pathMatchers(HttpMethod.OPTIONS).permitAll()
-                .pathMatchers("/login","/swagger-ui**","/webjars/**","/v2/api-docs","/swagger-resources/**").permitAll()
+                .pathMatchers(
+                        "/login",
+                        "/swagger-ui**",
+                        "/webjars/**",
+                        "/v2/api-docs",
+                        "/swagger-resources/**",
+                        "/",
+                        "/actuator/health"
+                ).permitAll()
                 .anyExchange().authenticated()
                 .and().build();
     }
