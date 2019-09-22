@@ -1,4 +1,4 @@
-package com.starter.demo;
+package com.starter.demo.controller;
 
 
 import com.starter.demo.domain.Message;

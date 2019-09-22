@@ -1,5 +1,7 @@
-package com.starter.demo;
+package com.starter.demo.configuration.security;
 
+import com.starter.demo.configuration.security.AuthenticationManager;
+import com.starter.demo.configuration.security.SecurityContextRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.http.HttpMethod;

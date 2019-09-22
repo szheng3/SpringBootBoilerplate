@@ -1,4 +1,4 @@
-package com.starter.demo;
+package com.starter.demo.service;
 
 import com.starter.demo.domain.User;
 import com.starter.demo.enums.Role;

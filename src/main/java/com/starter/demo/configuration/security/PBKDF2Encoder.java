@@ -1,4 +1,4 @@
-package com.starter.demo;
+package com.starter.demo.configuration.security;
 
 import java.security.NoSuchAlgorithmException;
 import java.security.spec.InvalidKeySpecException;

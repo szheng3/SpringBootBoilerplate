@@ -1,4 +1,4 @@
-package com.starter.demo;
+package com.starter.demo.configuration.security;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.reactive.config.CorsRegistry;
 import org.springframework.web.reactive.config.ResourceHandlerRegistry;

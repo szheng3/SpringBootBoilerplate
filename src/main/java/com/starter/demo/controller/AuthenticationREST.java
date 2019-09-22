@@ -1,5 +1,8 @@
-package com.starter.demo;
+package com.starter.demo.controller;
 
+import com.starter.demo.service.UserService;
+import com.starter.demo.configuration.security.JWTUtil;
+import com.starter.demo.configuration.security.PBKDF2Encoder;
 import com.starter.demo.domain.AuthRequest;
 import com.starter.demo.domain.AuthResponse;
 import org.springframework.beans.factory.annotation.Autowired;

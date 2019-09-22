@@ -1,4 +1,4 @@
-package com.starter.demo;
+package com.starter.demo.configuration.security;
 
 import com.starter.demo.domain.User;
 import io.jsonwebtoken.Claims;
