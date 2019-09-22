@@ -1,4 +1,4 @@
-package com.starter.demo.domain;
+package com.starter.demo.response;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

@@ -47,10 +47,9 @@ DROP TABLE IF EXISTS `user`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `user` (
-  `id` bigint(20) NOT NULL COMMENT '主键ID',
-  `name` varchar(30) DEFAULT NULL COMMENT '姓名',
-  `age` int(11) DEFAULT NULL COMMENT '年龄',
-  `email` varchar(50) DEFAULT NULL COMMENT '邮箱',
+  `id` int(11) NOT NULL COMMENT '主键ID',
+  `username` varchar(30) NOT NULL COMMENT '账号',
+  `password` varchar(45) NOT NULL COMMENT '密码',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -61,7 +60,7 @@ CREATE TABLE `user` (
 
 LOCK TABLES `user` WRITE;
 /*!40000 ALTER TABLE `user` DISABLE KEYS */;
-INSERT INTO `user` VALUES (1,'Jone',1,'test1@baomidou.com'),(2,'Jack',2,'test2@baomidou.com'),(3,'Tom',3,'test3@baomidou.com'),(4,'Sandy',4,'test4@baomidou.com'),(5,'Billie',5,'test5@baomidou.com');
+INSERT INTO `user` VALUES (1,'Jone','1'),(2,'Jack','2'),(3,'Tom','3'),(4,'Sandy','4'),(5,'Billie','5');
 /*!40000 ALTER TABLE `user` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -73,7 +72,7 @@ DROP TABLE IF EXISTS `user_has_role`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `user_has_role` (
-  `user_id` bigint(20) NOT NULL,
+  `user_id` int(11) NOT NULL,
   `role_id_role` int(11) NOT NULL,
   PRIMARY KEY (`user_id`,`role_id_role`),
   KEY `fk_user_has_role_role1_idx` (`role_id_role`),
@@ -102,4 +101,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2019-09-22  0:47:09
+-- Dump completed on 2019-09-22 12:59:47

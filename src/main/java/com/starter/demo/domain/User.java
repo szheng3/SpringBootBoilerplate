@@ -1,6 +1,8 @@
 package com.starter.demo.domain;
 
 
+import com.baomidou.mybatisplus.annotation.IdType;
+import com.baomidou.mybatisplus.annotation.TableId;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.starter.demo.enums.Role;
@@ -19,8 +21,10 @@ import org.springframework.security.core.userdetails.UserDetails;
 @ToString
 @AllArgsConstructor
 @NoArgsConstructor
-public class User implements UserDetails {
+public class User extends Root implements UserDetails {
 
+    @TableId(value = "user_id", type = IdType.AUTO)
+    private Integer userId;
     private String username;
     private String password;
 
@@ -28,7 +32,8 @@ public class User implements UserDetails {
     @Setter
     private Boolean enabled;
 
-    @Getter @Setter
+    @Getter
+    @Setter
     private List<Role> roles;
 
     public User(String username) {
@@ -39,6 +44,7 @@ public class User implements UserDetails {
     public String getUsername() {
         return username;
     }
+
     public void setUsername(String username) {
         this.username = username;
     }
@@ -47,18 +53,22 @@ public class User implements UserDetails {
     public boolean isAccountNonExpired() {
         return false;
     }
+
     @Override
     public boolean isAccountNonLocked() {
         return false;
     }
+
     @Override
     public boolean isCredentialsNonExpired() {
         return false;
     }
+
     @Override
     public boolean isEnabled() {
         return this.enabled;
     }
+
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return this.roles.stream().map(authority -> new SimpleGrantedAuthority(authority.name())).collect(Collectors.toList());
@@ -69,6 +79,7 @@ public class User implements UserDetails {
     public String getPassword() {
         return password;
     }
+
     @JsonProperty
     public void setPassword(String password) {
         this.password = password;

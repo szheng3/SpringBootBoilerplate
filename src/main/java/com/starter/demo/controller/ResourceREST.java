@@ -1,7 +1,7 @@
 package com.starter.demo.controller;
 
 
-import com.starter.demo.domain.Message;
+import com.starter.demo.response.Message;
 import java.security.Principal;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
