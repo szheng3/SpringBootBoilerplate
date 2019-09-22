@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.starter.demo.mapper.UserMapper">
+  <resultMap id="BaseResultMap" type="com.starter.demo.domain.User">
+    <!--@mbg.generated-->
+    <!--@Table user-->
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="age" jdbcType="INTEGER" property="age" />
+    <result column="email" jdbcType="VARCHAR" property="email" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    <!--@mbg.generated-->
+    id, `name`, age, email
+  </sql>
+
+
+  <select id="findAllByAge" resultType="com.starter.demo.domain.User">
+    select
+    * from user
+    where age=#{age,jdbcType=INTEGER}
+  </select>
+
+  <select id="findAllByEmail" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from user
+    where 1=1
+    <if test="email != null">
+      and email=#{email,jdbcType=VARCHAR}
+    </if>
+  </select>
+
+
+</mapper>

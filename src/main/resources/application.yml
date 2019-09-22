@@ -1,0 +1,6 @@
+mybatis-plus:
+  configuration:
+    default-enum-type-handler: com.baomidou.mybatisplus.extension.handlers.MybatisEnumTypeHandler
+spring:
+  profiles:
+    active: dev
