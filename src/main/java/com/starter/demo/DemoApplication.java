@@ -3,10 +3,12 @@ package com.starter.demo;
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.web.reactive.config.EnableWebFlux;
 //import org.springframework.context.annotation.Bean;
 //import org.springframework.context.annotation.Profile;
 
 @SpringBootApplication
+@EnableWebFlux
 @MapperScan("com.starter.demo.mapper")
 public class DemoApplication {
 

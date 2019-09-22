@@ -1,5 +1,6 @@
 package com.starter.demo;
 
+import com.starter.demo.response.IResponse;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 import reactor.core.publisher.Mono;
@@ -8,8 +9,8 @@ import reactor.core.publisher.Mono;
 public class UserController {
 
     @GetMapping("/")
-    public Mono<String> getMapping(){
+    public Mono<IResponse> getMapping(){
 
-        return Mono.just("Up");
+        return Mono.just(new IResponse());
     }
 }
