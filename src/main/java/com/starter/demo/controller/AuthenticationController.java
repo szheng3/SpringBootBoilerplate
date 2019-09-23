@@ -8,8 +8,6 @@ import com.starter.demo.response.AuthResponse;
 import com.starter.demo.service.UserService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -30,16 +28,17 @@ public class AuthenticationController {
     private UserService userRepository;
 
     @RequestMapping(value = "/login", method = RequestMethod.POST)
-    public Mono<ResponseEntity<AuthResponse>> login(@RequestBody AuthRequest ar) {
-//        log.info(ar.getUsername());
-
-        return userRepository.findByUsername(ar.getUsername()).map((userDetails) -> {
-            if (passwordEncoder.encode(ar.getPassword()).equals(userDetails.getPassword())) {
-
-                return ResponseEntity.ok(new AuthResponse(jwtUtil.generateToken(userDetails)));
-            }
-            throw new UnAuthorizedException();
-        }).defaultIfEmpty(ResponseEntity.status(HttpStatus.UNAUTHORIZED).build());
+    public Mono<AuthResponse> login(@RequestBody AuthRequest ar) {
+        return userRepository
+                .findByUsername(ar.getUsername())
+                .switchIfEmpty(Mono.error(new UnAuthorizedException("No User Found")))
+                .map((userDetails) -> {
+                    if (passwordEncoder.encode(ar.getPassword()).equals(userDetails.getPassword())) {
+                        String access_token = jwtUtil.generateToken(userDetails);
+                        return AuthResponse.builder().access_token(access_token).build();
+                    }
+                    throw new UnAuthorizedException();
+                });
     }
 
 
