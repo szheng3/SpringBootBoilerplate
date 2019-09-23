@@ -9,23 +9,25 @@
     <result column="username" jdbcType="VARCHAR" property="username"/>
     <result column="password" jdbcType="VARCHAR" property="password"/>
   </resultMap>
+  <resultMap id="UserResultMap" type="com.starter.demo.domain.User" extends="BaseResultMap">
+
+
+    <!--    <collection property="roleEnums" ofType="com.starter.demo.enums.RoleEnum">-->
+    <!--      <result column="roleEnums" />-->
+    <!--    </collection>-->
+    <collection property="roleEnums" ofType="com.starter.demo.enums.RoleEnum"
+      resultMap="com.starter.demo.mapper.RoleMapper.BaseResultMap"/>
+  </resultMap>
   <sql id="Base_Column_List">
     <!--@mbg.generated-->
     id, username, `password`
   </sql>
-  <resultMap id="UserResultMap" type="com.starter.demo.domain.User" extends="BaseResultMap">
 
 
-<!--    <collection property="roleEnums" ofType="com.starter.demo.enums.RoleEnum">-->
-<!--      <result column="roleEnums" />-->
-<!--    </collection>-->
-    <collection property="roleEnums" ofType="com.starter.demo.enums.RoleEnum" resultMap="com.starter.demo.mapper.RoleMapper.BaseResultMap"/>
-
-  </resultMap>
-
-  <select id="findByUsername"  resultMap="UserResultMap">
+  <select id="findByUsername" resultMap="UserResultMap">
     select
-    *
+    <include refid="Base_Column_List"/>,
+    r.role
     from user
     join user_has_role uhr on user.id = uhr.user_id
     join role r on uhr.role_id_role = r.id_role
