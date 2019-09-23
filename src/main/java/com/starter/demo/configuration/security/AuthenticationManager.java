@@ -1,8 +1,10 @@
 package com.starter.demo.configuration.security;
 
+import com.starter.demo.configuration.exception.runtime.UnAuthorizedException;
 import com.starter.demo.enums.RoleEnum;
 import io.jsonwebtoken.Claims;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.ReactiveAuthenticationManager;
@@ -21,9 +23,12 @@ public class AuthenticationManager implements ReactiveAuthenticationManager {
     @Override
     public Mono<Authentication> authenticate(Authentication authentication) {
         String authToken = authentication.getCredentials().toString();
-
-        String username = jwtUtil.getUsernameFromToken(authToken);
-
+        String username;
+        try {
+            username = jwtUtil.getUsernameFromToken(authToken);
+        } catch (Exception e) {
+            username = null;
+        }
         if (username != null && jwtUtil.validateToken(authToken)) {
             Claims claims = jwtUtil.getAllClaimsFromToken(authToken);
             List<String> role = claims.get("role", List.class);

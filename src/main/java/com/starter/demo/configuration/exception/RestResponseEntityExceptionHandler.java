@@ -3,6 +3,7 @@ package com.starter.demo.configuration.exception;
 import com.starter.demo.configuration.exception.runtime.ResourceMissingException;
 import com.starter.demo.configuration.exception.runtime.UnAuthorizedException;
 import com.starter.demo.response.ErrorResponse;
+import io.jsonwebtoken.ExpiredJwtException;
 import java.io.PrintWriter;
 import java.io.StringWriter;
 import lombok.extern.slf4j.Slf4j;
@@ -41,10 +42,10 @@ public class RestResponseEntityExceptionHandler {
         return errorResponseHandler(HttpStatus.BAD_REQUEST.value(), ex, ex.getMessage(), serverHttpRequest);
     }
 
-    @ExceptionHandler(value = {UnAuthorizedException.class})
+    @ExceptionHandler(value = {UnAuthorizedException.class, ExpiredJwtException.class})
     @ResponseStatus(code = HttpStatus.UNAUTHORIZED)
     @ResponseBody
-    protected ErrorResponse handleUnAuthorized(RuntimeException ex,ServerHttpRequest serverHttpRequest) {
-        return errorResponseHandler(HttpStatus.BAD_REQUEST.value(), ex, ex.getMessage(), serverHttpRequest);
+    protected ErrorResponse handleUnAuthorized(RuntimeException ex, ServerHttpRequest serverHttpRequest) {
+        return errorResponseHandler(HttpStatus.UNAUTHORIZED.value(), ex, ex.getMessage(), serverHttpRequest);
     }
 }
