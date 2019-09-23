@@ -56,8 +56,8 @@ public class JWTUtil implements Serializable {
 
     public String generateToken(User user) {
         Map<String, Object> claims = new HashMap<>();
-        List<RoleEnum> collect = user.getRoleEnums().stream().map(Role::getRole).collect(Collectors.toList());
-        claims.put("role", collect);
+        List<RoleEnum> roles = user.getRoleEnums().stream().map(Role::getRole).collect(Collectors.toList());
+        claims.put("role", roles);
         return doGenerateToken(claims, user.getUsername());
     }
 
