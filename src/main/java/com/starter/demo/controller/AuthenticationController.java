@@ -1,21 +1,18 @@
 package com.starter.demo.controller;
 
+import com.google.gson.Gson;
 import com.starter.demo.configuration.exception.runtime.UnAuthorizedException;
 import com.starter.demo.configuration.security.JWTUtil;
 import com.starter.demo.configuration.security.PBKDF2Encoder;
 import com.starter.demo.request.AuthRequest;
 import com.starter.demo.response.AuthResponse;
 import com.starter.demo.service.UserService;
-import java.io.IOException;
-import java.nio.charset.StandardCharsets;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.commons.io.IOUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.server.ServerWebExchange;
 import reactor.core.publisher.Mono;
 
 @RestController
@@ -31,9 +28,11 @@ public class AuthenticationController {
     @Autowired
     private UserService userRepository;
 
+    @Autowired
+    private Gson gson;
+
     @RequestMapping(value = "/login", method = RequestMethod.POST)
     public Mono<AuthResponse> login(@RequestBody AuthRequest ar) {
-
 
         return userRepository
                 .findByUsername(ar.getUsername())
@@ -44,6 +43,8 @@ public class AuthenticationController {
                         return AuthResponse.builder().access_token(access_token).build();
                     }
                     throw new UnAuthorizedException();
+                }).doOnNext(authResponse -> {
+                    log.info("request body: {} response body:{}", gson.toJson(ar), gson.toJson(authResponse));
                 });
     }
 

@@ -28,7 +28,7 @@ public class AuthenticationControllerTest extends BaseIntegrationTest {
     @Test
     public void loginForWrongPassword() {
         AuthRequest authRequest = new AuthRequest("user", "user3");
-        ErrorResponse as = RestAssured.given()
+        RestAssured.given()
                 .when()
                 .contentType(ContentType.JSON)
                 .body(authRequest)
@@ -37,7 +37,6 @@ public class AuthenticationControllerTest extends BaseIntegrationTest {
                 .statusCode(401)
                 .extract()
                 .as(ErrorResponse.class);
-        System.out.println(as);
     }
 
     @Test
