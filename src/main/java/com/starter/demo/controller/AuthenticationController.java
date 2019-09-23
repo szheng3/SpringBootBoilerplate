@@ -6,12 +6,16 @@ import com.starter.demo.configuration.security.PBKDF2Encoder;
 import com.starter.demo.request.AuthRequest;
 import com.starter.demo.response.AuthResponse;
 import com.starter.demo.service.UserService;
+import java.io.IOException;
+import java.nio.charset.StandardCharsets;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.io.IOUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.server.ServerWebExchange;
 import reactor.core.publisher.Mono;
 
 @RestController
@@ -29,6 +33,8 @@ public class AuthenticationController {
 
     @RequestMapping(value = "/login", method = RequestMethod.POST)
     public Mono<AuthResponse> login(@RequestBody AuthRequest ar) {
+
+
         return userRepository
                 .findByUsername(ar.getUsername())
                 .switchIfEmpty(Mono.error(new UnAuthorizedException("No User Found")))

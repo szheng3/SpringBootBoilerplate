@@ -31,11 +31,13 @@ class RequestLogger {
 
     fun getRequestMessage(exchange: ServerWebExchange): String {
         val request = exchange.request
+        val queryParams = request.queryParams
+        val remoteAddress = request.remoteAddress
         val method = request.method
         val path = request.uri.path
         val acceptableMediaTypes = request.headers.accept
         val contentType = request.headers.contentType
-        return ">>> $method $path ${HttpHeaders.ACCEPT}: $acceptableMediaTypes ${HttpHeaders.CONTENT_TYPE}: $contentType"
+        return ">>> $remoteAddress $method $path $queryParams ${HttpHeaders.ACCEPT}: $acceptableMediaTypes ${HttpHeaders.CONTENT_TYPE}: $contentType"
     }
 
     fun getResponseMessage(exchange: ServerWebExchange): String {
