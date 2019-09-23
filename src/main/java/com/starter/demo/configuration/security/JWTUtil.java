@@ -22,7 +22,7 @@ public class JWTUtil implements Serializable {
     private Key key;
 
     public JWTUtil(@Value("${springbootwebfluxjjwt.jjwt.secret}") String secret) {
-        this.key = new SecretKeySpec(Base64.getEncoder().encodeToString(secret.getBytes()).getBytes(), SignatureAlgorithm.HS512.getJcaName());
+        this.key = new SecretKeySpec(secret.getBytes(), SignatureAlgorithm.HS512.getJcaName());
     }
 
 
