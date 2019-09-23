@@ -1,8 +1,8 @@
 package com.starter.demo.configuration.exception;
 
+import com.starter.demo.configuration.exception.runtime.ResourceMissingException;
+import com.starter.demo.configuration.exception.runtime.UnAuthorizedException;
 import com.starter.demo.response.ErrorResponse;
-import java.io.PrintWriter;
-import java.io.StringWriter;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;

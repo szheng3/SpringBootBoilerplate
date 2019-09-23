@@ -1,4 +1,6 @@
-package com.starter.demo.configuration.exception;
+package com.starter.demo.configuration.exception.runtime;
+
+import com.starter.demo.configuration.exception.RootException;
 
 public class ResourceMissingException extends RootException {
 
