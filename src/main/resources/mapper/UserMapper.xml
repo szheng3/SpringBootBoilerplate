@@ -13,12 +13,9 @@
     <!--@mbg.generated-->
     id, username, `password`
   </sql>
-  <resultMap id="UserResultMap" type="com.starter.demo.domain.User">
+  <resultMap id="UserResultMap" type="com.starter.demo.domain.User" extends="BaseResultMap">
 
 
-    <id column="id" jdbcType="INTEGER" property="id"/>
-    <result column="username" jdbcType="VARCHAR" property="username"/>
-    <result column="password" jdbcType="VARCHAR" property="password"/>
 <!--    <collection property="roleEnums" ofType="com.starter.demo.enums.RoleEnum">-->
 <!--      <result column="roleEnums" />-->
 <!--    </collection>-->
@@ -26,7 +23,7 @@
 
   </resultMap>
 
-  <select id="findByUsername" resultMap="UserResultMap">
+  <select id="findByUsername"  resultMap="UserResultMap">
     select
     *
     from user
