@@ -1,5 +1,11 @@
 package com.starter.demo.response;
 
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.ToString;
+
+@Data
 public class Response {
 
     protected int status = 1;
@@ -27,10 +33,6 @@ public class Response {
 
     public Response(Status status) {
         this.status = status.intValue;
-    }
-
-    public int getStatus() {
-        return status;
     }
 
 
