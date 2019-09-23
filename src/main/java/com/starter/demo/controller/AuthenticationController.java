@@ -8,12 +8,12 @@ import com.starter.demo.request.AuthRequest;
 import com.starter.demo.response.AuthResponse;
 import com.starter.demo.service.UserService;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 import reactor.core.publisher.Mono;
+import reactor.core.scheduler.Schedulers;
 
 @RestController
 @Slf4j
@@ -37,8 +37,9 @@ public class AuthenticationController {
     @RequestMapping(value = "/login", method = RequestMethod.POST)
     public Mono<AuthResponse> login(@RequestBody AuthRequest ar) {
 
-        return userRepository
-                .findByUsername(ar.getUsername())
+        return Mono
+                .fromSupplier(() -> userRepository.findByUsername(ar.getUsername()))
+                .subscribeOn(Schedulers.elastic())
                 .switchIfEmpty(Mono.error(new UnAuthorizedException("No User Found")))
                 .map((userDetails) -> {
                     if (passwordEncoder.encode(ar.getPassword()).equals(userDetails.getPassword())) {
