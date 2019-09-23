@@ -2,7 +2,7 @@ package com.starter.demo.controller;
 
 import static com.starter.demo.util.TokenStore.tokenStore;
 
-import com.starter.demo.BaseIntegrationTest;
+import com.starter.demo.base.BaseIntegrationTest;
 import com.starter.demo.enums.RoleEnum;
 import io.restassured.RestAssured;
 import io.restassured.http.ContentType;

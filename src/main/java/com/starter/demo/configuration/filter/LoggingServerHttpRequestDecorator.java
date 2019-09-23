@@ -1,5 +1,7 @@
 package com.starter.demo.configuration.filter;
 
+import java.io.ByteArrayOutputStream;
+import java.util.Optional;
 import org.slf4j.Logger;
 import org.springframework.core.io.buffer.DataBuffer;
 import org.springframework.http.MediaType;
@@ -7,9 +9,6 @@ import org.springframework.http.server.reactive.ServerHttpRequest;
 import org.springframework.http.server.reactive.ServerHttpRequestDecorator;
 import org.springframework.http.server.reactive.ServerHttpResponse;
 import reactor.core.publisher.Flux;
-
-import java.io.ByteArrayOutputStream;
-import java.util.Optional;
 
 class LoggingServerHttpRequestDecorator extends ServerHttpRequestDecorator implements WithMemoizingFunction {
 

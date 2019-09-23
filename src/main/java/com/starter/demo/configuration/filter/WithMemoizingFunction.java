@@ -1,12 +1,12 @@
 package com.starter.demo.configuration.filter;
-import org.slf4j.Logger;
-import org.springframework.core.io.buffer.DataBuffer;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.nio.channels.Channels;
 import java.util.function.Function;
+import org.slf4j.Logger;
+import org.springframework.core.io.buffer.DataBuffer;
 
 interface WithMemoizingFunction {
 

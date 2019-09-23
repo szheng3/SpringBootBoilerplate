@@ -1,8 +1,9 @@
-package com.starter.demo;
+package com.starter.demo.base;
 
 
 import static com.starter.demo.util.TokenStore.tokenStore;
 
+import com.starter.demo.DemoApplication;
 import com.starter.demo.enums.RoleEnum;
 import com.starter.demo.request.AuthRequest;
 import com.starter.demo.response.AuthResponse;

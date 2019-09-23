@@ -1,7 +1,7 @@
 package com.starter.demo.configuration.filter;
+
 import org.slf4j.Logger;
 import org.springframework.http.server.reactive.ServerHttpRequest;
-import org.springframework.stereotype.Component;
 import org.springframework.web.server.ServerWebExchange;
 import org.springframework.web.server.ServerWebExchangeDecorator;
 import org.springframework.web.server.WebFilter;

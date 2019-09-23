@@ -1,14 +1,13 @@
 package com.starter.demo.mapper;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
-import com.starter.demo.DemoApplication;
-import com.starter.demo.DemoApplicationTests;
+import com.starter.demo.base.BaseSpringBootTest;
 import com.starter.demo.domain.User;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
-public class UserMapperTest extends DemoApplicationTests {
+public class UserMapperTest extends BaseSpringBootTest {
     @Autowired
     private UserMapper userMapper;
 

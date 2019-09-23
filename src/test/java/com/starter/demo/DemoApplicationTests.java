@@ -1,19 +1,10 @@
 package com.starter.demo;
 
-import com.starter.demo.domain.User;
-import java.util.List;
-import org.junit.Assert;
+import com.starter.demo.base.BaseSpringBootTest;
 import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.context.ActiveProfiles;
-import org.springframework.test.context.junit4.SpringRunner;
 
-@RunWith(SpringRunner.class)
-@SpringBootTest
-@ActiveProfiles("test")
-public class DemoApplicationTests {
+
+public class DemoApplicationTests extends BaseSpringBootTest {
 
 	@Test
 	public void contextLoads() {

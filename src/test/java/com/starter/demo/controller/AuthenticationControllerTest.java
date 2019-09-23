@@ -2,7 +2,7 @@ package com.starter.demo.controller;
 
 import static org.hamcrest.Matchers.hasKey;
 
-import com.starter.demo.BaseIntegrationTest;
+import com.starter.demo.base.BaseIntegrationTest;
 import com.starter.demo.request.AuthRequest;
 import io.restassured.RestAssured;
 import io.restassured.http.ContentType;

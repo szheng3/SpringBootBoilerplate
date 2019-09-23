@@ -1,10 +1,10 @@
 package com.starter.demo.controller;
 
-import com.starter.demo.service.UserService;
 import com.starter.demo.configuration.security.JWTUtil;
 import com.starter.demo.configuration.security.PBKDF2Encoder;
 import com.starter.demo.request.AuthRequest;
 import com.starter.demo.response.AuthResponse;
+import com.starter.demo.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
