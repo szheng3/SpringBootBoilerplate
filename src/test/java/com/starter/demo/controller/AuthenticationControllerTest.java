@@ -36,6 +36,18 @@ public class AuthenticationControllerTest extends BaseIntegrationTest {
                 .statusCode(401);
     }
 
+    @Test
+    public void NoUser() {
+        AuthRequest authRequest = new AuthRequest("user3", "user3");
+        RestAssured.given()
+                .when()
+                .contentType(ContentType.JSON)
+                .body(authRequest)
+                .post("/login")
+                .then()
+                .statusCode(401);
+    }
+
 
     @Test
     public void loginForAdmin() {
