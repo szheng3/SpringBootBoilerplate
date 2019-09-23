@@ -1,30 +1,21 @@
 package com.starter.demo.service;
 
 import com.starter.demo.domain.User;
-import com.starter.demo.enums.RoleEnum;
-import java.util.Arrays;
+import com.starter.demo.mapper.UserMapper;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import reactor.core.publisher.Mono;
+import reactor.core.scheduler.Schedulers;
 
 @Service
 public class UserService {
 
-    //username:passwowrd -> user:user
-    private final String userUsername = "user";// password: user
-    private final User user = new User(1,userUsername, "cBrlgyL2GI2GINuLUUwgojITuIufFycpLG4490dhGtY=", true, Arrays.asList(RoleEnum.ROLE_USER));
-
-    //username:passwowrd -> admin:admin
-    private final String adminUsername = "admin";// password: admin
-    private final User admin = new User(2,adminUsername, "dQNjUIMorJb8Ubj2+wVGYp6eAeYkdekqAcnYp+aRq5w=", true, Arrays.asList(RoleEnum.ROLE_ADMIN));
+    @Autowired
+    private UserMapper userMapper;
 
     public Mono<User> findByUsername(String username) {
-        if (username.equals(userUsername)) {
-            return Mono.just(user);
-        } else if (username.equals(adminUsername)) {
-            return Mono.just(admin);
-        } else {
-            return Mono.empty();
-        }
+        return Mono.fromSupplier(() -> userMapper.findByUsername(username)).subscribeOn(Schedulers.elastic());
+
     }
 
 }

@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.starter.demo.mapper.UserMapper">
+  <resultMap id="BaseResultMap" type="com.starter.demo.domain.User">
+    <!--@mbg.generated-->
+    <!--@Table user-->
+    <id column="id" jdbcType="INTEGER" property="id"/>
+    <result column="username" jdbcType="VARCHAR" property="username"/>
+    <result column="password" jdbcType="VARCHAR" property="password"/>
+  </resultMap>
+  <sql id="Base_Column_List">
+    <!--@mbg.generated-->
+    id, username, `password`
+  </sql>
+  <resultMap id="UserResultMap" type="com.starter.demo.domain.User">
+    <!--@mbg.generated-->
+    <!--@Table user-->
+    <id column="id" jdbcType="INTEGER" property="id"/>
+    <result column="username" jdbcType="VARCHAR" property="username"/>
+    <result column="password" jdbcType="VARCHAR" property="password"/>
+<!--    <association property="roleEnums" javaType="java.util.List" column="roleEnums"/>-->
+    <collection property="roleEnums" ofType="com.starter.demo.enums.RoleEnum">
+      <result column="roleEnums" />
+    </collection>
+  </resultMap>
+
+  <select id="findByUsername" resultMap="UserResultMap">
+    select
+    *,
+    r.role as roleEnums
+    from user
+    join user_has_role uhr on user.id = uhr.user_id
+    join role r on uhr.role_id_role = r.id_role
+    where 1=1
+    <if test="username != null">
+      and username=#{username,jdbcType=VARCHAR}
+    </if>
+  </select>
+</mapper>

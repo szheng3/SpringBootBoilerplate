@@ -2,13 +2,16 @@ package com.starter.demo.domain;
 
 
 import com.baomidou.mybatisplus.annotation.IdType;
+import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
+import com.baomidou.mybatisplus.annotation.TableName;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.starter.demo.enums.RoleEnum;
 import java.util.Collection;
 import java.util.List;
 import java.util.stream.Collectors;
+import javax.persistence.Transient;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -21,16 +24,18 @@ import org.springframework.security.core.userdetails.UserDetails;
 @ToString
 @AllArgsConstructor
 @NoArgsConstructor
+@TableName(value = "user")
 public class User extends Root implements UserDetails {
 
-    @TableId(value = "user_id", type = IdType.AUTO)
-    private Integer userId;
+    @TableId(value = "id", type = IdType.AUTO)
+    private Integer id;
     private String username;
     private String password;
 
-    @Getter
-    @Setter
-    private Boolean enabled;
+    //    @Getter
+//    @Setter
+    @Transient
+    private Boolean enabled = true;
 
     @Getter
     @Setter

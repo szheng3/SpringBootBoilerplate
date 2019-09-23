@@ -16,7 +16,7 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Table structure for table `roleEnum`
+-- Table structure for table `role`
 --
 
 DROP TABLE IF EXISTS `role`;
@@ -26,16 +26,16 @@ CREATE TABLE `role` (
   `id_role` int(11) NOT NULL AUTO_INCREMENT,
   `role` varchar(45) DEFAULT NULL,
   PRIMARY KEY (`id_role`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `roleEnum`
+-- Dumping data for table `role`
 --
 
 LOCK TABLES `role` WRITE;
 /*!40000 ALTER TABLE `role` DISABLE KEYS */;
-INSERT INTO `role` VALUES (1,'admin');
+INSERT INTO `role` VALUES (1,'admin'),(2,'user');
 /*!40000 ALTER TABLE `role` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -60,7 +60,7 @@ CREATE TABLE `user` (
 
 LOCK TABLES `user` WRITE;
 /*!40000 ALTER TABLE `user` DISABLE KEYS */;
-INSERT INTO `user` VALUES (1,'Jone','1'),(2,'Jack','2'),(3,'Tom','3'),(4,'Sandy','4'),(5,'Billie','5');
+INSERT INTO `user` VALUES (1,'user','cBrlgyL2GI2GINuLUUwgojITuIufFycpLG4490dhGtY='),(2,'admin','dQNjUIMorJb8Ubj2+wVGYp6eAeYkdekqAcnYp+aRq5w=');
 /*!40000 ALTER TABLE `user` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -88,7 +88,7 @@ CREATE TABLE `user_has_role` (
 
 LOCK TABLES `user_has_role` WRITE;
 /*!40000 ALTER TABLE `user_has_role` DISABLE KEYS */;
-INSERT INTO `user_has_role` VALUES (1,1);
+INSERT INTO `user_has_role` VALUES (2,1),(1,2);
 /*!40000 ALTER TABLE `user_has_role` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -101,4 +101,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2019-09-22 12:59:47
+-- Dump completed on 2019-09-22 19:14:18

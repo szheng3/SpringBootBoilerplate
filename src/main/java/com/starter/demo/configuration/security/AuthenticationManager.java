@@ -2,7 +2,6 @@ package com.starter.demo.configuration.security;
 
 import com.starter.demo.enums.RoleEnum;
 import io.jsonwebtoken.Claims;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,19 +22,15 @@ public class AuthenticationManager implements ReactiveAuthenticationManager {
     public Mono<Authentication> authenticate(Authentication authentication) {
         String authToken = authentication.getCredentials().toString();
 
-        String username;
-        try {
-            username = jwtUtil.getUsernameFromToken(authToken);
-        } catch (Exception e) {
-            username = null;
-        }
+        String username = jwtUtil.getUsernameFromToken(authToken);
+
         if (username != null && jwtUtil.validateToken(authToken)) {
             Claims claims = jwtUtil.getAllClaimsFromToken(authToken);
-            List<String> rolesMap = claims.get("role", List.class);
-            List<RoleEnum> roleEnums = new ArrayList<>();
-            for (String rolemap : rolesMap) {
-                roleEnums.add(RoleEnum.valueOf(rolemap));
-            }
+            List<String> role = claims.get("role", List.class);
+            List<RoleEnum> roleEnums = role
+                    .stream()
+                    .map(RoleEnum::valueOf)
+                    .collect(Collectors.toList());
             UsernamePasswordAuthenticationToken auth = new UsernamePasswordAuthenticationToken(
                     username,
                     null,
