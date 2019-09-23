@@ -1,15 +1,22 @@
 package com.starter.demo.configuration.security;
 
+import com.baomidou.mybatisplus.extension.api.R;
 import com.starter.demo.domain.User;
+import com.starter.demo.domain.generated.Role;
+import com.starter.demo.enums.RoleEnum;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import java.io.Serializable;
 import java.security.Key;
 import java.util.Base64;
+import java.util.Collection;
+import java.util.Collections;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 import javax.crypto.spec.SecretKeySpec;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
@@ -49,7 +56,8 @@ public class JWTUtil implements Serializable {
 
     public String generateToken(User user) {
         Map<String, Object> claims = new HashMap<>();
-        claims.put("role", user.getRoleEnums());
+        List<RoleEnum> collect = user.getRoleEnums().stream().map(Role::getRole).collect(Collectors.toList());
+        claims.put("role", collect);
         return doGenerateToken(claims, user.getUsername());
     }
 
