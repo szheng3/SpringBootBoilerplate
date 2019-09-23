@@ -19,17 +19,20 @@ import reactor.core.publisher.Mono;
 @Slf4j
 public class AuthenticationController {
 
-    @Autowired
-    private JWTUtil jwtUtil;
+    private final JWTUtil jwtUtil;
 
-    @Autowired
-    private PBKDF2Encoder passwordEncoder;
+    private final PBKDF2Encoder passwordEncoder;
 
-    @Autowired
-    private UserService userRepository;
+    private final UserService userRepository;
 
-    @Autowired
-    private Gson gson;
+    private final Gson gson;
+
+    public AuthenticationController(JWTUtil jwtUtil, PBKDF2Encoder passwordEncoder, UserService userRepository, Gson gson) {
+        this.jwtUtil = jwtUtil;
+        this.passwordEncoder = passwordEncoder;
+        this.userRepository = userRepository;
+        this.gson = gson;
+    }
 
     @RequestMapping(value = "/login", method = RequestMethod.POST)
     public Mono<AuthResponse> login(@RequestBody AuthRequest ar) {
