@@ -17,6 +17,7 @@ public class UserService {
     private UserMapper userMapper;
 
     public Mono<User> findByUsername(String username) {
+
         return Mono.fromSupplier(() -> userMapper.findByUsername(username)
         ).subscribeOn(Schedulers.elastic());
 

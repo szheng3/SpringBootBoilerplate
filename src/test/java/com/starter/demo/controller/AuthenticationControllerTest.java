@@ -23,6 +23,20 @@ public class AuthenticationControllerTest extends BaseIntegrationTest {
                 .statusCode(200);
     }
 
+
+    @Test
+    public void loginForWrongPassword() {
+        AuthRequest authRequest = new AuthRequest("user", "user3");
+        RestAssured.given()
+                .when()
+                .contentType(ContentType.JSON)
+                .body(authRequest)
+                .post("/login")
+                .then()
+                .statusCode(401);
+    }
+
+
     @Test
     public void loginForAdmin() {
         AuthRequest authRequest = new AuthRequest("admin", "admin");
